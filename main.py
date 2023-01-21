@@ -6,6 +6,9 @@ from OpenGL.GLU import *
 from mesa import Mesa
 from cadeira import Cadeira
 
+from objetos import Cilindro
+
+from functions import Rotate, Translate
 
 def main():
     pg.init()
@@ -14,13 +17,15 @@ def main():
     glMatrixMode(GL_PROJECTION)
 
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
-    glMatrixMode(GL_MODELVIEW)  
+    glMatrixMode(GL_MODELVIEW)
     modelMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
     button_down = False
-    mesa = Mesa()
-    cadeira = Cadeira()
 
-    glTranslatef(0.0, 0.0, -5)  
+    #mesa = Mesa()
+    #cadeira = Cadeira()
+    cl = Cilindro()
+
+    Translate(0.0, 0.0, -5)  
     while True:
         glPushMatrix()
         glLoadIdentity()
@@ -31,22 +36,22 @@ def main():
                 quit()
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == 4:
-                    glTranslatef(0.0, 0.0, 0.5) 
+                    Translate(0.0, 0.0, 0.5) 
                 if event.button == 5:
-                    glTranslatef(0.0, 0.0, -0.5)
+                    Translate(0.0, 0.0, -0.5)
             keys =pg.key.get_pressed()
-            if keys[K_w]:
-                glTranslatef(0.0, 0.5, 0.0)
-            if keys[K_a]:
-                glTranslatef(-0.5, 0.0, 0.0)
             if keys[K_s]:
-                glTranslatef(0.0, -0.5, 0.0)
+                Translate(0.0, 0.25, 0.0)
             if keys[K_d]:
-                glTranslatef(0.5, 0.0, 0.0)
+                Translate(-0.25, 0.0, 0.0)
+            if keys[K_w]:
+                Translate(0.0, -0.25, 0.0)
+            if keys[K_a]:
+                Translate(0.25, 0.0, 0.0)
             if event.type == pg.MOUSEMOTION:
                 if button_down == True:
-                    glRotatef(event.rel[1], 1, 0, 0)
-                    glRotatef(event.rel[0], 0, 1, 0)
+                    Rotate(event.rel[0], 1, 0, 0)
+                    Rotate(-event.rel[1], 0, 1, 0)
         
         for event in pg.mouse.get_pressed():
             if pg.mouse.get_pressed()[0] == 1:
@@ -61,11 +66,14 @@ def main():
         modelMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
 
         glLoadIdentity()
-        glTranslatef(0, 0, -5)
+        Translate(0, 0, -5)
         glMultMatrixf(modelMatrix)
+
+
+        cl.draw()
         #tampo da mesa
-        mesa.cria_mesa((1,1,1),(0,2,0))
-        cadeira.cria_cadeira((1,1,1), (0,0,0))
+        #mesa.cria_mesa((1,1,1),(0,2,0))
+        #cadeira.cria_cadeira((1,1,1), (0,0,0))
  
         #wireCube(cubeEdges, cubeVertices)
         glPopMatrix()
