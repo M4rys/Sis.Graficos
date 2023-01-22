@@ -4,12 +4,41 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from mesa import Mesa
+from cord import Cord
 from cadeira import Cadeira
-
+from cafe import Cafe
 from objetos import Cilindro
 
 from functions import Rotate, Translate
+def gera_cafe_cultural(cadeira, mesa, cafe):
+    cafe.cria_cafe((4,6,4), (0,0,3))
+    mesa.cria_mesa((1,1,1),(10,7,0))
+    cadeira.cria_cadeira((1,1,1), (10,5,0))
+    Rotate(-90, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (-7,8,0))
+    Rotate(180, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (7,-12,0))
+    Rotate(90, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (-10,-9,0))
+    Rotate(90, 0, 0, 1)
 
+    mesa.cria_mesa((1,1,1),(-18,6,0))
+    cadeira.cria_cadeira((1,1,1), (-18,4,0))
+    Rotate(-90, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (-6,-20,0))
+    Rotate(180, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (6,16,0))
+    Rotate(90, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (18,-8,0))
+    
+    mesa.cria_mesa((1,1,1),(19,5,0))
+    cadeira.cria_cadeira((1,1,1), (19,3,0))
+    Rotate(-90, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (-5,17,0))
+    Rotate(180, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (5,-21,0))
+    Rotate(90, 0, 0, 1)
+    cadeira.cria_cadeira((1,1,1), (-19,-7,0))
 def main():
     pg.init()
     display = (1680, 1050)
@@ -21,8 +50,9 @@ def main():
     modelMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
     button_down = False
 
-    #mesa = Mesa()
-    #cadeira = Cadeira()
+    mesa = Mesa()
+    cafe = Cafe()
+    cadeira = Cadeira()
     cl = Cilindro()
 
     Translate(0.0, 0.0, -5)  
@@ -50,8 +80,8 @@ def main():
                 Translate(0.25, 0.0, 0.0)
             if event.type == pg.MOUSEMOTION:
                 if button_down == True:
-                    Rotate(event.rel[0], 1, 0, 0)
-                    Rotate(-event.rel[1], 0, 1, 0)
+                    Rotate(event.rel[0]/2, 1, 0, 0)
+                    Rotate(-event.rel[1]/2, 0, 1, 0)
         
         for event in pg.mouse.get_pressed():
             if pg.mouse.get_pressed()[0] == 1:
@@ -70,11 +100,8 @@ def main():
         glMultMatrixf(modelMatrix)
 
 
-        cl.draw()
-        #tampo da mesa
-        #mesa.cria_mesa((1,1,1),(0,2,0))
-        #cadeira.cria_cadeira((1,1,1), (0,0,0))
- 
+        gera_cafe_cultural(cadeira=cadeira, cafe=cafe, mesa=mesa)
+        
         #wireCube(cubeEdges, cubeVertices)
         glPopMatrix()
         pg.display.flip()
