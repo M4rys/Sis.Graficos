@@ -7,7 +7,9 @@ from mesa import Mesa
 from cord import Cord
 from cadeira import Cadeira
 from cafe import Cafe
-from objetos import Cilindro
+from objetos import *
+
+from functions import *
 
 from functions import Rotate, Translate
 def gera_cafe_cultural(cadeira, mesa, cafe):
@@ -45,7 +47,9 @@ def main():
     pg.display.set_mode(display, DOUBLEBUF|OPENGL)
     glMatrixMode(GL_PROJECTION)
 
-    gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
+    gluPerspective(45, (display[0]/display[1]), 0.1, 100.0)
+    #glOrtho(-10, 10, -10, 10, 1.5, 100)
+
     glMatrixMode(GL_MODELVIEW)
     modelMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
     button_down = False
@@ -54,6 +58,9 @@ def main():
     cafe = Cafe()
     cadeira = Cadeira()
     cl = Cilindro()
+    cone = Cone(m_base=8, altura=6)
+
+    vez_de = "na"
 
     Translate(0.0, 0.0, -5)  
     while True:
@@ -82,6 +89,16 @@ def main():
                 if button_down == True:
                     Rotate(event.rel[0]/2, 1, 0, 0)
                     Rotate(-event.rel[1]/2, 0, 1, 0)
+
+                #     if event.rel[0] != 0 and ("x" in vez_de or vez_de == "na"):
+                #         Rotate(event.rel[0]/2, 1, 0, 0)
+                #         vez_de = "x"
+                    
+                #     if event.rel[1] != 0 and ("y" in vez_de or vez_de == "na"):
+                #         Rotate(-event.rel[1]/2, 0, 1, 0)
+                #         vez_de = "y"
+                # else:
+                #     vez_de = "na"
         
         for event in pg.mouse.get_pressed():
             if pg.mouse.get_pressed()[0] == 1:
@@ -99,8 +116,16 @@ def main():
         Translate(0, 0, -5)
         glMultMatrixf(modelMatrix)
 
-
+        #Scale(10, 0, 0)
         gera_cafe_cultural(cadeira=cadeira, cafe=cafe, mesa=mesa)
+
+        glPushMatrix()
+
+        Scale(3, 3, 2)
+        Translate(0, 0, 6.8)
+        cone.draw()
+
+        glPopMatrix()
         
         #wireCube(cubeEdges, cubeVertices)
         glPopMatrix()

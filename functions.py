@@ -5,6 +5,20 @@ import numpy as np
 
 from math import cos, sin
 
+def Scale(x: float, y: float, z: float):
+    x = x if x != 0 else 1
+    y = y if y != 0 else 1
+    z = z if z != 0 else 1
+
+    matriz = np.array([
+        [x, 0, 0, 0],
+        [0, y, 0, 0],
+        [0, 0, z, 0],
+        [0, 0, 0, 1]
+    ], dtype=float)
+
+    glMultMatrixf(matriz.T)
+
 def Translate(x: float, y: float, z: float):
     matriz = np.array([
         [1, 0, 0, x],
