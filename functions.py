@@ -5,6 +5,35 @@ import numpy as np
 
 from math import cos, sin
 
+# Projeções
+
+def Perspectiva(left, right, top, bottom, near, far):
+    l, r, t, b, n, f = left, right, top, bottom, near, far
+
+    matriz = np.array([
+        [(2*n) / (r - l),       0,            (r + l) / (r - l),                        0],
+        [      0,          2*n / (t - b),     (t + b) / (t - b),                        0],
+        [      0,               0,          -1* (f + n) / (f - n),       -2*f*n / (f - n)],
+        [      0,               0,                  -1,                                 0]
+    ], dtype=float)
+
+    glMultMatrixf(matriz.T)
+
+def Ortogonal(left, right, top, bottom, near, far):
+    l, r, t, b, n, f = left, right, top, bottom, near, far
+
+    matriz = np.array([
+        [2 / (r - l),           0,                   0,            -1 * (r + l) / (r - l)],
+        [     0,           2 / (t - b),              0,            -1 * (t + b) / (t - b)],
+        [     0,                0,             -2 / (f - n),       -1 * (f + n) / (f - n)],
+        [     0,                0,                   0,                                 1]
+    ], dtype=float)
+
+    glMultMatrixf(matriz.T)
+
+
+# Transformações
+
 def Scale(x: float, y: float, z: float):
     x = x if x != 0 else 1
     y = y if y != 0 else 1
