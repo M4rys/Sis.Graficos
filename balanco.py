@@ -23,8 +23,8 @@ class Balanco():
 
 def solidCube(cubeQuads, cubeVertices):
         
-        glBegin(GL_QUADS)
-        for cubeQuad in cubeQuads:
-            for cubeVertex in cubeQuad:
-                glVertex3fv(cubeVertices[cubeVertex])
-        glEnd()
+    glBegin(GL_QUADS)
+    for cubeQuad in cubeQuads:
+        for cubeVertex in cubeQuad:
+            glVertex3fv(cubeVertices[cubeVertex])
+    glEnd()

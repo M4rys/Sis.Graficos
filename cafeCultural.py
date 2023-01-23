@@ -92,9 +92,11 @@ class CafeCultural():
         Translate(2,-2,0)
         self.cadeira.cria_cadeira((1,1,1), (18,-8,0))
         glPopMatrix()
+
     def gera_colunas(self):
         
         glPushMatrix()
+        
         glColor3f(0.41, 0.35, 0.26)
         Scale(2, 2, 2)
         Translate(0, 4, 6.8)
@@ -124,6 +126,7 @@ class CafeCultural():
         self.cl.draw()
 
         glPopMatrix()
+
     def gera_balanco(self):
         glPushMatrix()
         Scale(2, 2, 0)

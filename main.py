@@ -14,6 +14,16 @@ def main():
     display = (1680, 1050)
     pg.display.set_mode(display, DOUBLEBUF|OPENGL)
 
+    # ativar algoritmos
+
+    glEnable(GL_DEPTH_TEST)
+
+    #iluminação
+    glEnable(GL_COLOR_MATERIAL)
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
+    glShadeModel(GL_SMOOTH) #tonalização
+
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
 
@@ -30,6 +40,8 @@ def main():
     glLoadIdentity()
 
     #configurar ambiente
+
+    Iluminar()
     
     Scale(-1, 0, 0)
     Translate(0, 6, -5)

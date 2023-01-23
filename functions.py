@@ -5,6 +5,33 @@ import numpy as np
 
 from math import cos, sin
 
+# Iluminação
+
+def Iluminar():
+    luzAmbiente = [0.5, 0.5, 0.5, 1] 
+    luzDifusa = [0.1, 0.1, 0.1, 0.1]         # cor
+    luzEspecular = [0.1, 0.1, 0.1, 0.1]      # brilho
+    posicaoLuz = [0, 0, 20, 1]
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente)
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa)
+    glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular)
+    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
+
+    # material base
+
+    #glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, [0.1, 0.1, 0.1, 1]) #refexão
+    #glMateriali(GL_FRONT_AND_BACK,GL_SHININESS, 3) #brilho
+    glMaterialfv(GL_FRONT, GL_AMBIENT, [0.2295, 0.08825, 0.0275, 1.0])
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, [0.5508, 0.2118, 0.066, 1.0])
+    glMaterialfv(GL_FRONT, GL_SPECULAR, [0.580594, 0.223257, 0.0695701, 1.0])
+    glMaterialf(GL_FRONT, GL_SHININESS, 51.2)
+
+    # luz
+
+    #glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente)
+
+
 # Projeções
 
 def Perspectiva(left, right, top, bottom, near, far):
@@ -94,3 +121,13 @@ def rotateZ(ang_rad):
     ], dtype=float)
 
     glMultMatrixf(matriz.T)
+
+# Normal
+
+#
+def Normal(p1, p2):
+    x = p1[1] * p2[2] - p1[2] * p2[1]
+    y = p1[2] * p2[0] - p1[0] * p2[2]
+    z = p1[0] * p2[1] - p1[1] * p2[0]
+
+    glNormal(x, y, z)

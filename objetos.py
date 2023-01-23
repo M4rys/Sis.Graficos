@@ -1,7 +1,7 @@
 from OpenGL.GL import *
 import math
 
-from functions import Rotate, Translate
+from functions import Normal
 
 class Cilindro:
     def __init__(self, n_pontos=30, altura=10):
@@ -12,20 +12,12 @@ class Cilindro:
         pontos_c1 = []
         pontos_c2 = []
 
-        glBegin(GL_POLYGON)
-
         for i in range(self.n_pts):
             angle = 2 * math.pi * i / self.n_pts
             
             vet = math.cos(angle), math.sin(angle), -self.altura//2
 
             pontos_c1.append(vet)
-
-            glVertex3f(*vet)
-
-        glEnd()
-
-        glBegin(GL_POLYGON)
 
         for i in range(self.n_pts):
             angle = 2 * math.pi * i / self.n_pts
@@ -34,7 +26,21 @@ class Cilindro:
 
             pontos_c2.append(vet)
 
-            glVertex3f(*vet)
+        glBegin(GL_POLYGON)
+
+        Normal(pontos_c1[1], pontos_c1[0])
+
+        for ponto in pontos_c1:
+            glVertex3f(*ponto)
+
+        glEnd()
+
+        glBegin(GL_POLYGON)
+
+        Normal(pontos_c2[1], pontos_c2[0])
+
+        for ponto in pontos_c2:
+            glVertex3f(*ponto)
 
         glEnd()
 
@@ -47,6 +53,9 @@ class Cilindro:
 
             glBegin(GL_QUADS)
 
+            #glMaterialfv(GL_FRONT, GL_DIFFUSE, [0, 0, 0, 0])
+
+            Normal(pontos_c1[i-1], pontos_c1[i])
             glVertex3f(*pontos_c1[i-1])
             glVertex3f(*pontos_c1[i])
             glVertex3f(*pontos_c2[i])
@@ -55,25 +64,6 @@ class Cilindro:
             glEnd()
 
             i += 1
-
-        #exit()
-
-        # glPushMatrix()
-
-        # glColor3f(0.29, 0.21, 0.12)
-
-        # Rotate(45, 0, 1, 0)
-        # Translate(10, 0, 0)
-
-        # glBegin(GL_QUADS)
-
-        # for cubeQuad in self.cuboFaces:
-        #     for cubeVertex in cubeQuad:
-        #         glVertex3fv(self.caixa[cubeVertex])
-                
-        # glEnd()
-
-        # glPopMatrix()
 
 class Cone:
     def __init__(self, n_pontos=30, altura=10, m_base=1):
@@ -85,20 +75,12 @@ class Cone:
         pontos_c1 = []
         pontos_c2 = []
 
-        glBegin(GL_POLYGON)
-
         for i in range(self.n_pts):
             angle = 2 * math.pi * i / self.n_pts
             
             vet = math.cos(angle) * self.m_base, math.sin(angle) * self.m_base, -self.altura//2
 
             pontos_c1.append(vet)
-
-            glVertex3f(*vet)
-
-        glEnd()
-
-        glBegin(GL_POLYGON)
 
         for i in range(self.n_pts):
             angle = 2 * math.pi * i / self.n_pts
@@ -107,7 +89,22 @@ class Cone:
 
             pontos_c2.append(vet)
 
-            glVertex3f(*vet)
+
+        glBegin(GL_POLYGON)
+
+        Normal(pontos_c1[1], pontos_c1[0])
+
+        for ponto in pontos_c1:
+            glVertex3f(*ponto)
+
+        glEnd()
+
+        glBegin(GL_POLYGON)
+
+        Normal(pontos_c2[1], pontos_c2[0])
+
+        for ponto in pontos_c2:
+            glVertex3f(*ponto)
 
         glEnd()
 
@@ -120,6 +117,7 @@ class Cone:
 
             glBegin(GL_QUADS)
 
+            Normal(pontos_c1[i-1], pontos_c1[i])
             glVertex3f(*pontos_c1[i-1])
             glVertex3f(*pontos_c1[i])
             glVertex3f(*pontos_c2[i])
