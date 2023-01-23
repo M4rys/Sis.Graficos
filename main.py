@@ -108,7 +108,9 @@ def main():
 
         #Objetos do mapa
 
-        cafe.draw()
+        cafe.gera_cafe_cultural()
+        cafe.gera_colunas()
+        cafe.gera_balanco()
         
         glPopMatrix()
 

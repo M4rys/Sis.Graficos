@@ -30,19 +30,12 @@ class Mesa():
         partes.append(self.pernaDE)
         partes.append(self.juntapernaF)
         partes.append(self.juntapernaT)
-        axisList = []
-        new_partes = []
+        
 
         for parte in partes:
-            for ponto in parte:
-                x = ponto[0] * prop[0] + pos[0]
-                y = ponto[1] * prop[1] + pos[1]
-                z = ponto[2] * prop[2] + pos[2]
-                axisList.append((x, y, z))
-            new_partes.append((axisList[0], axisList[1], axisList[2], axisList[3], axisList[4], axisList[5], axisList[6], axisList[7]))
-            axisList = []
-
-        self.mostra_mesa(new_partes[0], new_partes[1], new_partes[2], new_partes[3], new_partes[4], new_partes[5], new_partes[6], new_partes[7], new_partes[8])
+            
+            glColor3f(0.29, 0.21, 0.12)
+            solidCube(self.cuboFaces, parte)
 
 
     def mostra_mesa(self, tampa, suporte1, suporte2, peE1, peD1, peE2, pD2, jpF, jpT):
