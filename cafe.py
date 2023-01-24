@@ -1,7 +1,7 @@
 from OpenGL.GL import *
 from functions import *
 from objetos import Cilindro
-
+from functions import Normal, solidCube
 
 class Cafe():
 
@@ -67,19 +67,11 @@ class Cafe():
         for parte in partes:
             if parte == self.janela1 or parte == self.porta1:
                 glColor3f(0.24, 0.30, 0.30)
-                solidCube(self.cuboFaces, parte)
+                
             else:
                 glColor3f(0.89, 0.89, 0.89)
-                solidCube(self.cuboFaces, parte)
+            solidCube(self.cuboFaces, parte)
 
 
-
-def solidCube(cubeQuads, cubeVertices):
-        
-        glBegin(GL_QUADS)
-        for cubeQuad in cubeQuads:
-            for cubeVertex in cubeQuad:
-                glVertex3fv(cubeVertices[cubeVertex])
-        glEnd()
 
 

@@ -1,4 +1,5 @@
 from OpenGL.GL import *
+from functions import Normal, solidCube
 
 
 class Cadeira():
@@ -45,10 +46,3 @@ class Cadeira():
             glColor3f(0.29, 0.21, 0.12)
             solidCube(self.cuboFaces, parte)
     
-def solidCube(cubeQuads, cubeVertices):
-        
-        glBegin(GL_QUADS)
-        for cubeQuad in cubeQuads:
-            for cubeVertex in cubeQuad:
-                glVertex3fv(cubeVertices[cubeVertex])
-        glEnd()

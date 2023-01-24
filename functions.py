@@ -131,3 +131,15 @@ def Normal(p1, p2):
     z = p1[0] * p2[1] - p1[1] * p2[0]
 
     glNormal(x, y, z)
+
+def solidCube(cubeQuads, cubeVertices):
+    
+    glBegin(GL_QUADS)
+    for cubeQuad in cubeQuads:
+        if cubeQuad[1] < cubeQuad[0]:
+            Normal(cubeVertices[cubeQuad[1]], cubeVertices[cubeQuad[3]])
+        else:
+            Normal(cubeVertices[cubeQuad[1]], cubeVertices[cubeQuad[0]])
+        for cubeVertex in cubeQuad:
+            glVertex3fv(cubeVertices[cubeVertex])
+    glEnd()

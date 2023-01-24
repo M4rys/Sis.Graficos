@@ -1,4 +1,5 @@
 from OpenGL.GL import *
+from functions import Normal, solidCube
 
 
 class Mesa():
@@ -52,10 +53,4 @@ class Mesa():
         solidCube(self.cuboFaces, jpT)
 
 
-def solidCube(cubeQuads, cubeVertices):
-    
-    glBegin(GL_QUADS)
-    for cubeQuad in cubeQuads:
-        for cubeVertex in cubeQuad:
-            glVertex3fv(cubeVertices[cubeVertex])
-    glEnd()
+

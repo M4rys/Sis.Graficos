@@ -1,4 +1,5 @@
 from OpenGL.GL import *
+from functions import Normal, solidCube
 
 class Balanco():
 
@@ -21,10 +22,3 @@ class Balanco():
                 glColor3f(0.9, 0.9, 0.9)
             solidCube(self.cuboFaces, parte)
 
-def solidCube(cubeQuads, cubeVertices):
-        
-    glBegin(GL_QUADS)
-    for cubeQuad in cubeQuads:
-        for cubeVertex in cubeQuad:
-            glVertex3fv(cubeVertices[cubeVertex])
-    glEnd()
