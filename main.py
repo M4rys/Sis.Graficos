@@ -14,14 +14,6 @@ def main():
     display = (1680, 1050)
     pg.display.set_mode(display, DOUBLEBUF|OPENGL)
 
-    # ativar algoritmos
-
-    glEnable(GL_DEPTH_TEST)
-
-    #iluminação
-    glEnable(GL_COLOR_MATERIAL)
-    glEnable(GL_LIGHTING)
-    glEnable(GL_LIGHT0)
     glShadeModel(GL_SMOOTH) #tonalização
 
     glMatrixMode(GL_PROJECTION)
@@ -29,7 +21,7 @@ def main():
 
     # projeções
 
-    #Ortogonal(-10, 10, -10, 10, 1, 100)
+    #Ortogonal(-10, 10, -10, 10, 1.5, 100)
     Perspectiva(-1.5, 1.5, -1.5, 1.5, 1, 50)
     #gluPerspective(45, (display[0]/display[1]), 0.1, 100.0)
     #glOrtho(-10, 10, -10, 10, 1.5, 100)
@@ -41,12 +33,24 @@ def main():
 
     #configurar ambiente
 
-    Iluminar()
-    
     Scale(-1, 0, 0)
-    Translate(0, 6, -5)
+    Translate(0, 0, -5)
     Rotate(-90, 1, 0, 0)
     Rotate(-90, 0, 1, 0)
+
+    glLight(GL_LIGHT0, GL_POSITION,  (500, 500, 500, 1)) # point light from the left, top, front
+    glLightfv(GL_LIGHT0, GL_AMBIENT, (0.8, 0.8, 0.8, 1))
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, (0.2, 0.2, 0.2, 1))
+    glLightfv(GL_LIGHT0, GL_SPECULAR, (1, 0.7, 0, 1))
+
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
+    glEnable(GL_COLOR_MATERIAL)
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
+
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, [0.1, 0.1, 0.1, 1]) #refexão
+
+    glEnable(GL_DEPTH_TEST)
 
     #salvar matriz
 
@@ -57,7 +61,6 @@ def main():
 
     cafe = CafeCultural()
 
-    #vez_de = "na"
     while True:
         glPushMatrix()
         glLoadIdentity()
@@ -88,16 +91,6 @@ def main():
                 if button_down == True:
                     Rotate(event.rel[0]/2, 1, 0, 0)
                     Rotate(event.rel[1]/2, 0, 1, 0)
-
-                #     if event.rel[0] != 0 and ("x" in vez_de or vez_de == "na"):
-                #         Rotate(event.rel[0]/2, 1, 0, 0)
-                #         vez_de = "x"
-                    
-                #     if event.rel[1] != 0 and ("y" in vez_de or vez_de == "na"):
-                #         Rotate(-event.rel[1]/2, 0, 1, 0)
-                #         vez_de = "y"
-                # else:
-                #     vez_de = "na"
         
         for event in pg.mouse.get_pressed():
             if pg.mouse.get_pressed()[0] == 1:

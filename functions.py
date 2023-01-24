@@ -5,33 +5,6 @@ import numpy as np
 
 from math import cos, sin
 
-# Iluminação
-
-def Iluminar():
-    luzAmbiente = [0.5, 0.5, 0.5, 1] 
-    luzDifusa = [0.1, 0.1, 0.1, 0.1]         # cor
-    luzEspecular = [0.1, 0.1, 0.1, 0.1]      # brilho
-    posicaoLuz = [0, 0, 20, 1]
-
-    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente)
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa)
-    glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular)
-    glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz)
-
-    # material base
-
-    #glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, [0.1, 0.1, 0.1, 1]) #refexão
-    #glMateriali(GL_FRONT_AND_BACK,GL_SHININESS, 3) #brilho
-    glMaterialfv(GL_FRONT, GL_AMBIENT, [0.2295, 0.08825, 0.0275, 1.0])
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, [0.5508, 0.2118, 0.066, 1.0])
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [0.580594, 0.223257, 0.0695701, 1.0])
-    glMaterialf(GL_FRONT, GL_SHININESS, 51.2)
-
-    # luz
-
-    #glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente)
-
-
 # Projeções
 
 def Perspectiva(left, right, top, bottom, near, far):
@@ -132,13 +105,18 @@ def Normal(p1, p2):
 
     glNormal(x, y, z)
 
-def solidCube(cubeQuads, cubeVertices):
+def solidCube(cubeQuads, cubeVertices, top=False):
     
     glBegin(GL_QUADS)
+
+
     for cubeQuad in cubeQuads:
-        if cubeQuad[1] < cubeQuad[0]:
+        if top:
+            glNormal(0, 0, 1)
+
+        if not top and cubeQuad[1] < cubeQuad[0]:
             Normal(cubeVertices[cubeQuad[1]], cubeVertices[cubeQuad[3]])
-        else:
+        elif not top:
             Normal(cubeVertices[cubeQuad[1]], cubeVertices[cubeQuad[0]])
         for cubeVertex in cubeQuad:
             glVertex3fv(cubeVertices[cubeVertex])

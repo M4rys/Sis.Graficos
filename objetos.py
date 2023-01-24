@@ -37,7 +37,7 @@ class Cilindro:
 
         glBegin(GL_POLYGON)
 
-        Normal(pontos_c2[1], pontos_c2[0])
+        Normal(pontos_c2[0], pontos_c2[1])
 
         for ponto in pontos_c2:
             glVertex3f(*ponto)
@@ -101,7 +101,7 @@ class Cone:
 
         glBegin(GL_POLYGON)
 
-        Normal(pontos_c2[1], pontos_c2[0])
+        Normal(pontos_c2[0], pontos_c2[1])
 
         for ponto in pontos_c2:
             glVertex3f(*ponto)

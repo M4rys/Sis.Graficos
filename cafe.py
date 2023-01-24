@@ -56,14 +56,20 @@ class Cafe():
         partes.append(self.porta3)
         
         
-        glColor3f(0, 0.255, 0)
-        solidCube(self.cuboFaces, self.chao)
         glPushMatrix()
+
+        glColor3f(0, 0.5, 0)
+
+        solidCube(self.cuboFaces, self.chao, top=True)
+
+        Translate(0, 1, -1)
+        Scale(4, 4, 0.01)
         glColor3f(0.5, 0.5, 0.5)
-        Translate(0,1,-1)
-        Scale(4,4,0.01)
+
         cl.draw()
+
         glPopMatrix()
+
         for parte in partes:
             if parte == self.janela1 or parte == self.porta1:
                 glColor3f(0.24, 0.30, 0.30)

@@ -29,8 +29,6 @@ class CafeCultural():
         self.cafe.cria_cafe(self.chao)
         glPopMatrix()
 
-        
-
         glPushMatrix()
         Translate(0,9,4)
         Scale(2.5,2.5,0)
@@ -96,7 +94,7 @@ class CafeCultural():
     def gera_colunas(self):
         
         glPushMatrix()
-        
+
         glColor3f(0.41, 0.35, 0.26)
         Scale(2, 2, 2)
         Translate(0, 4, 6.8)
