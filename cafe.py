@@ -38,8 +38,8 @@ class Cafe():
 
     def cria_cafe(self, cl) :
         partes = []
-        partes.append(self.paredeLE) 
-        partes.append(self.paredeT) 
+        partes.append(self.paredeLE)
+        partes.append(self.paredeT)
         partes.append(self.paredeLD1) 
         partes.append(self.paredeLD2) 
         partes.append(self.paredeLD3) 
@@ -64,7 +64,7 @@ class Cafe():
 
         Translate(0, 1, -1)
         Scale(4, 4, 0.01)
-        glColor3f(0.5, 0.5, 0.5)
+        glColor3f(0.2, 0.2, 0.2)
 
         cl.draw()
 

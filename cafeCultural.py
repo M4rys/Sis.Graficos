@@ -17,7 +17,7 @@ class CafeCultural():
         self.mesa = Mesa()
         self.cafe = Cafe()
         self.cadeira = Cadeira()
-        self.cl = Cilindro()
+        self.cl = Cilindro(altura=8) #cilindro central
         self.chao = Cilindro(n_pontos=10)
         self.cone = Cone(m_base=8, altura=6)
         self.ba = Balanco()
@@ -30,7 +30,7 @@ class CafeCultural():
         glPopMatrix()
 
         glPushMatrix()
-        Translate(0,9,4)
+        Translate(0,9,3)
         Scale(2.5,2.5,0)
         self.cl.draw()
         glPopMatrix()
@@ -97,14 +97,14 @@ class CafeCultural():
 
         glColor3f(0.41, 0.35, 0.26)
         Scale(2, 2, 2)
-        Translate(0, 4, 6.8)
+        Translate(0, 4, 5.8)
         self.cone.draw()
         glPopMatrix()
 
         glPushMatrix()
         glColor3f(0.31, 0.25, 0.16)
         Scale(0.5, 0.5, 0.85)
-        Translate(25, -2.5, 4)
+        Translate(25, -2.5, 2.59)
         self.cl.draw()
         Translate(6, 19, 0)
         self.cl.draw()
@@ -121,6 +121,8 @@ class CafeCultural():
         Translate(6, -19, 0)
         self.cl.draw()
         Translate(15, -11, 0)
+        self.cl.draw()
+        Translate(20, 0, 0)
         self.cl.draw()
 
         glPopMatrix()
